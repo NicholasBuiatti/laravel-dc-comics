@@ -17,14 +17,16 @@ class ComicsTableSeeder extends Seeder
     public function run(Faker $faker): void
     {
         //POPOLO LA TABELLA CON QUESTO SEEDER
-        $newComic = new Comic();
+        for ($i = 0; $i < 10; $i++) {
+            $newComic = new Comic();
 
-        $newComic->title = "Sofia";
-        $newComic->descritpion = "Lorem";
-        $newComic->thumb = "ciao";
-        $newComic->price = "12.99";
-        $newComic->series = "salve";
-        $newComic->type = "giallo";
-        $newComic->save();
+            $newComic->title = $faker->name();
+            $newComic->descritpion = $faker->paragraph(3);
+            $newComic->thumb = "ciao";
+            $newComic->price = "12.99";
+            $newComic->series = "salve";
+            $newComic->type = $faker->name();
+            $newComic->save();
+        }
     }
 }

@@ -18,5 +18,9 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+        //POSSO SPERDIRE TUTTI I SEEDER SEMPLICEMENTE CON IL COMANDO PHP ARTISAN DB:SEED
+        $this->call([
+            ComicsTableSeeder::class
+        ]);
     }
 }
