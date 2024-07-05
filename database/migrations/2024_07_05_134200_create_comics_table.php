@@ -17,9 +17,10 @@ return new class extends Migration
             //CREO LE COLONNE CON I NOMI E LE PROPRIETà CHE DEVONO AVERE
             $table->string("title", 50);
             $table->text("descritpion");
-            $table->string("thumb");
+            $table->text("thumb");
             $table->string("price");
             $table->string("series");
+            $table->string("sale_date")->nullable();
             $table->string("type");
 
             $table->timestamps();
