@@ -3,8 +3,8 @@
 @section('content')
 	<section class="container">
 		<h1>Aggiungi un Fumetto</h1>
-		<form action="" method="">
-
+		<form action="action="{{ route('comics.store') }}" method="POST">
+			@csrf
 			<div class="mb-3 col-4">
 				<label class="form-label">TITOLO</label>
 				<input type="text" class="form-control" name="title" required>
