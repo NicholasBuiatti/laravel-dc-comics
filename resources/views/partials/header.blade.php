@@ -9,6 +9,8 @@
 			<a href="{{ route('home') }}" class="{{ Route::currentRouteName() == 'home' ? 'text-danger' : '' }} me-3">HOME</a>
 			<a href="{{ route('comics.index') }}"
 				class="{{ Route::currentRouteName() == 'comics.index' ? 'text-danger' : '' }} me-3">LISTA FUMETTI</a>
+			<a href="{{ route('comics.create') }}"
+				class="{{ Route::currentRouteName() == 'home' ? 'text-danger' : '' }} me-3">AGGIUNGI FUMETTO</a>
 		</nav>
 	</header>
 </header>
