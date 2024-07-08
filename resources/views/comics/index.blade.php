@@ -13,6 +13,11 @@
 					</div>
 					<a href="/comics/{{ $comic->id }}" class="btn btn-primary">More Info</a>
 					<a href="{{ route('comics.edit', $comic->id) }}" class="btn btn-secondary">Modify</a>
+					<form action="{{ route('comics.destroy', $comic->id) }}" method="POST">
+						@method('DELETE')
+						@csrf
+						<button type="submit" class="btn btn-primary">Destroy</a>
+					</form>
 				</div>
 			@endforeach
 		</div>

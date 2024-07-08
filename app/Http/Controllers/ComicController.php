@@ -98,18 +98,19 @@ class ComicController extends Controller
      */
     public function update(Request $request, Comic $comic)
     {
-        //SALVO I DATI CHE RICEVO NEL FORM IN UN ARRAY ASSOCIATIO DATA
+        // //SALVO I DATI CHE RICEVO NEL FORM IN UN ARRAY ASSOCIATIO DATA
         $data = $request->all();
 
-        // NON SERVE CHE CREO UN OGGETTO NUOVO PERCHè STO MODIFICANDO UNO GIà ESISTENTE
-        $comic->title = $data['title'];
-        $comic->descritpion = $data['description'];
-        $comic->thumb = $data['thumb'];
-        $comic->price = $data['price'];
-        $comic->series = $data['series'];
-        $comic->sale_date = $data['sale_date'];
-        $comic->type = $data['type'];
-        $comic->save();
+        // // NON SERVE CHE CREO UN OGGETTO NUOVO PERCHè STO MODIFICANDO UNO GIà ESISTENTE
+        // $comic->title = $data['title'];
+        // $comic->descritpion = $data['description'];
+        // $comic->thumb = $data['thumb'];
+        // $comic->price = $data['price'];
+        // $comic->series = $data['series'];
+        // $comic->sale_date = $data['sale_date'];
+        // $comic->type = $data['type'];
+        // $comic->save();
+        $comic->update($data);
 
         return redirect()->route('comics.show', $comic->id);
     }
@@ -117,8 +118,10 @@ class ComicController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Comic $comic)
     {
-        //
+        $comic->delete();
+
+        return redirect()->route('comics.index');
     }
 }
