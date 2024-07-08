@@ -35,17 +35,34 @@ class ComicController extends Controller
     public function store(Request $request)
     {
         //SALVO I DATI CHE RICEVO NEL FORM IN UN ARRAY ASSOCIATIO DATA
-        $comic = $request->all();
+        // $comic = $request->all();
+
+        $data = $request->validate([
+            "title" => "required|min:3|max:100",
+            "descritpion" => "required|min:12|max:255",
+            "thumb" => "required",
+            "price" => "required",
+            "series" => "required",
+            "sale_date" => "required",
+            "type" => "required"
+        ]);
 
         //CREO UN OGGETTO NUOVO CHE PRENDE I DATI DALL'ARRAY DATA
+        // $newComic = new Comic();
+        // $newComic->title = $comic['title'];
+        // $newComic->descritpion = $comic['description'];
+        // $newComic->thumb = $comic['thumb'];
+        // $newComic->price = $comic['price'];
+        // $newComic->series = $comic['series'];
+        // $newComic->sale_date = $comic['sale_date'];
+        // $newComic->type = $comic['type'];
+        // $newComic->save();
+
+        // CREO UN NUOVO OGGETTO DOVE CI ISTANZIO I DATI TRAMITE FILL
         $newComic = new Comic();
-        $newComic->title = $comic['title'];
-        $newComic->descritpion = $comic['description'];
-        $newComic->thumb = $comic['thumb'];
-        $newComic->price = $comic['price'];
-        $newComic->series = $comic['series'];
-        $newComic->sale_date = $comic['sale_date'];
-        $newComic->type = $comic['type'];
+        $newComic->fill($data);
+
+        // SALVO I DATI SU DB
         $newComic->save();
 
         return redirect()->route('comics.show', $newComic->id);
@@ -54,33 +71,26 @@ class ComicController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
-    {
-        //METODO PER FAR VEDERE UNA CARTA DEL CATALOGO COMICS E PASSARLA AL DATA
-        $comicsList = Comic::all();
-        $data = [
-            "comicsList" => $comicsList[$id - 1]
-        ];
-        return view("comics.show", $data);
-
-        //METODO ALTERNATIVO
-        // $comicsList = Comic::find($id);
-        // $data = [
-        //     "comicsList" => $comicsList
-        // ];
-        // return view("comics.show", $data);
-    }
-
-    //METODO BREVE CHE PRENDE LA CLASSE COMIC E LA POPOLA IN BASE ALL'ID IN AUTOMATICO PER MERITO DI LARAVEL
-    // public function show(Comic $comic)
+    // public function show(string $id)
     // {
-
+    //     //METODO ALTERNATIVO
+    //     $comicsList = Comic::find($id);
     //     $data = [
-    //         "comicsList" => $comic
+    //         "comicsList" => $comicsList
     //     ];
-
     //     return view("comics.show", $data);
     // }
+
+    //METODO BREVE CHE PRENDE LA CLASSE COMIC E LA POPOLA IN BASE ALL'ID IN AUTOMATICO PER MERITO DI LARAVEL
+    public function show(Comic $comic)
+    {
+
+        $data = [
+            "comicsList" => $comic
+        ];
+
+        return view("comics.show", $data);
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -112,7 +122,7 @@ class ComicController extends Controller
         // $comic->save();
         $comic->update($data);
 
-        return redirect()->route('comics.show', $comic->id);
+        return redirect()->route('comics.show', $comic);
     }
 
     /**
