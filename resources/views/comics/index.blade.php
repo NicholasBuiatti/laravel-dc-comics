@@ -12,6 +12,7 @@
 						<h5 class="card-title">Titolo: {{ $comic->title }}</h5>
 					</div>
 					<a href="/comics/{{ $comic->id }}" class="btn btn-primary">More Info</a>
+					<a href="{{ route('comics.edit', $comic->id) }}" class="btn btn-secondary">Modify</a>
 				</div>
 			@endforeach
 		</div>
